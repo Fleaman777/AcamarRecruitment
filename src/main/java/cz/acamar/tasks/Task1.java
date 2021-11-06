@@ -1,5 +1,7 @@
 package cz.acamar.tasks;
 
+import java.util.LinkedList;
+
 public class Task1 {
 
     /**
@@ -17,6 +19,30 @@ public class Task1 {
      * @return - the length of the last word in the string.
      */
     public int lengthOfLastWord(String str) {
-        return 0;
+
+        if (str == null || str.trim().isEmpty()) {
+            return 0;
+        }
+
+        char[] strChars = str.trim().toCharArray();
+
+        LinkedList<StringBuilder> strList = new LinkedList<>();
+        StringBuilder oneString = new StringBuilder();
+
+        for (int i = 0; i < strChars.length; i++) {
+            if (strChars[i] != ' ') {
+                oneString.append(strChars[i]);
+            } else {
+                strList.add(oneString);
+                oneString = new StringBuilder();
+            }
+
+            if (i == strChars.length - 1) {
+                strList.add(oneString);
+            }
+        }
+
+        return strList.getLast().length();
+
     }
 }
